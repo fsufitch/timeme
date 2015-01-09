@@ -18,6 +18,13 @@ def test_context_mgr():
         time.sleep(1)
     check_time_within(1.0, t.time, 0.1)
 
+def test_internal_context_mgr():
+    with Timer() as t:
+        time.sleep(1)
+        check_time_within(1.0, t.time, 0.1)
+        time.sleep(1)
+    check_time_within(2.0, t.time, 0.1)
+
 def test_context_mgr_with_exception():
     t = Timer()
     try:

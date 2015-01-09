@@ -19,7 +19,7 @@ class Ticker(Timer):
     def ticker(self):
         while not self._tick_event.wait(self.tick_interval):
             self.ticks += 1
-            self.on_tick()
+            self.on_tick(self)
 
     def start(self):
         super(Ticker, self).start()
