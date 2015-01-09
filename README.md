@@ -60,17 +60,23 @@ Ticker
 
 Need a function called at a regular interval? `Ticker` is a subclass
 of `Timer` that lets you specify a function to be called at a regular
-interval.
+interval in a separate thread.
 
     >>> from timeme.ticker import Ticker
     >>> def tickfunc(ticker):
-    ...     print('tick')
+    ...     print('tock')
     ... 
     >>> with Ticker(tickfunc, 2) as t:
-    ...     time.sleep(6)
+    ...     time.sleep(1)
+    ...     for i in range(3):
+    ...         print('tick')
+    ...         time.sleep(2)
     ... 
     tick
+    tock
     tick
+    tock
     tick
-    >>> print(t.ticks)
+    tock
+    >>> t.ticks
     3
