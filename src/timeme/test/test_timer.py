@@ -38,3 +38,16 @@ def test_measure_before_end():
         check_time_within(2.0, t.time, 0.1)
         time.sleep(1)
     check_time_within(3.0, t.time, 0.1)
+
+def test_on_complete():
+    output = {}
+    def complete(timer):
+        output['complete'] = timer
+    
+    t = Timer(complete)
+    with t:
+        assert not output.get('complete')
+        time.sleep(1)
+        assert not output.get('complete')
+
+    assert output.get('complete') is t
